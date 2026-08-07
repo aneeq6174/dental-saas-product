@@ -20,6 +20,7 @@ const SubmissionSchema = new mongoose.Schema(
 
     aiReply: String,
     appointmentTime: Date,
+    followUpSent: { type: Boolean, default: false },
 
     repliedAt: Date,
     bookedAt: Date,
