@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
 const statusColors = {
@@ -11,7 +11,7 @@ const statusColors = {
   completed: "bg-purple-100 text-purple-800",
 };
 
-export default function DashboardPage() {
+function DashboardContent() {
   const searchParams = useSearchParams();
   const clinicId = searchParams.get("clinicId");
 
@@ -65,5 +65,13 @@ export default function DashboardPage() {
         ))}
       </div>
     </div>
+  );
+}
+
+export default function DashboardPage() {
+  return (
+    <Suspense fallback={<div className="max-w-5xl mx-auto p-8 text-gray-500">Loading...</div>}>
+      <DashboardContent />
+    </Suspense>
   );
 }
