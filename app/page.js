@@ -15,7 +15,7 @@ export default function Home() {
           and follows up automatically — so your front desk doesn't have to.
         </p>
         <div className="mt-8 flex justify-center gap-4">
-          <a href="mailto:aneeq@solvistack.com" className="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700">
+          <a href="https://calendly.com/aneeqijaz99/30min" target="_blank" rel="noopener noreferrer" className="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700">
             Book a Demo
           </a>
         </div>
