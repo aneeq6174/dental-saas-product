@@ -1,22 +1,52 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --paper: #FAF8F4;
+  --ink: #14231F;
+  --teal: #0B6E5C;
+  --teal-dark: #084F42;
+  --signal: #2F9E44;
+  --gold: #B8791A;
+  --line: #E3DFD5;
+  --background: var(--paper);
+  --foreground: var(--ink);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.font-display {
+  font-family: 'Fraunces', serif;
+  font-optical-sizing: auto;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.reveal {
+  animation: fadeUp 0.7s ease-out both;
+}
+
+@keyframes cardCycle {
+  0%, 20% { opacity: 0; transform: translateY(8px); }
+  25%, 95% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-8px); }
+}
+.demo-step {
+  animation: cardCycle 8s ease-in-out infinite;
+}
+.demo-step:nth-child(2) { animation-delay: 2s; }
+.demo-step:nth-child(3) { animation-delay: 4s; }
+.demo-step:nth-child(4) { animation-delay: 6s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .demo-step { animation: none !important; opacity: 1 !important; transform: none !important; }
 }
 
 body {
