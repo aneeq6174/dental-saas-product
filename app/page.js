@@ -43,7 +43,7 @@ export default function Home() {
             chases the no-shows — so nothing sits in an inbox overnight again.
           </p>
           <div className="mt-9 flex flex-wrap items-center gap-4">
-            
+            <a
               href="https://calendly.com/aneeqijaz99/30min"
               target="_blank"
               rel="noopener noreferrer"
@@ -135,7 +135,7 @@ export default function Home() {
           <p className="text-[var(--ink)]/60 mb-9 max-w-md mx-auto">
             A 30-minute call — we'll show you the full flow, and what it takes to set up.
           </p>
-          
+          <a
             href="https://calendly.com/aneeqijaz99/30min"
             target="_blank"
             rel="noopener noreferrer"
