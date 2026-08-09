@@ -1,9 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
-// NOTE: replace with real auth-derived clinicId once auth is wired up (Clerk recommended)
-const DEMO_CLINIC_ID = "6a6f7a38488c96519c015a9d";
+import { useSearchParams } from "next/navigation";
 
 const statusColors = {
   new: "bg-gray-200 text-gray-800",
@@ -14,18 +12,31 @@ const statusColors = {
 };
 
 export default function DashboardPage() {
+  const searchParams = useSearchParams();
+  const clinicId = searchParams.get("clinicId");
+
   const [submissions, setSubmissions] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`/api/submissions?clinicId=${DEMO_CLINIC_ID}`, {
-      headers: { "x-admin-secret": process.env.NEXT_PUBLIC_ADMIN_SECRET },
-    })
+    if (!clinicId) {
+      setLoading(false);
+      return;
+    }
+    fetch(`/api/admin/submissions?clinicId=${clinicId}`)
       .then((res) => res.json())
       .then((data) => setSubmissions(data.submissions || []))
       .catch(console.error)
       .finally(() => setLoading(false));
-  }, []);
+  }, [clinicId]);
+
+  if (!clinicId) {
+    return (
+      <div className="max-w-5xl mx-auto p-8">
+        <p className="text-gray-500">No clinic selected. Go to the admin panel and click "View Dashboard" on a clinic.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-5xl mx-auto p-8">
