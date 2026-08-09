@@ -67,7 +67,7 @@ export default function Home() {
                 <div
                   key={s.label}
                   className="demo-step absolute inset-x-0 top-0"
-                  style={{ animationDelay: `${i * 2}s` }}
+                  
                 >
                   <div className="flex items-start justify-between mb-2">
                     <span className="font-medium text-[15px]">{s.label}</span>
