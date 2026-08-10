@@ -14,7 +14,8 @@ const ClinicSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     ownerEmail: { type: String, required: true },
-    slug: { type: String, required: true, unique: true }, // used in public form URL
+    slug: { type: String, required: true, unique: true },
+    dashboardPassword: { type: String, required: true }, // used in public form URL
 
     branding: {
       logoUrl: String,

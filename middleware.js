@@ -3,7 +3,14 @@ import { NextResponse } from "next/server";
 export function middleware(req) {
   const { pathname } = req.nextUrl;
 
-  if (pathname === "/admin/login" || pathname === "/api/admin/login") {
+  if (
+    pathname === "/admin/login" ||
+    pathname === "/api/admin/login" ||
+    pathname === "/clinic-login" ||
+    pathname === "/api/clinic/login" ||
+    pathname.startsWith("/intake") ||
+    pathname.startsWith("/api/public")
+  ) {
     return NextResponse.next();
   }
 
@@ -17,9 +24,19 @@ export function middleware(req) {
     }
   }
 
+  if (pathname.startsWith("/clinic-dashboard") || pathname.startsWith("/api/clinic")) {
+    const session = req.cookies.get("clinic_session")?.value;
+    if (!session) {
+      if (pathname.startsWith("/api/clinic")) {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      }
+      return NextResponse.redirect(new URL("/clinic-login", req.url));
+    }
+  }
+
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/admin/:path*", "/api/admin/:path*"],
+  matcher: ["/admin/:path*", "/api/admin/:path*", "/clinic-dashboard/:path*", "/api/clinic/:path*"],
 };
